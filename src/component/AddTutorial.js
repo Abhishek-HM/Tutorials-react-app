@@ -8,14 +8,50 @@ const AddTutorial=()=>{
         description:"",
         published:""
     };
+    // const initialTutorialDetailState={//createdOn
+    //     created_on:""
+    // }
 
     const [tutorial,setTutorial]=useState(initialTutorialState);
+    //const [tutorialDetails,setTutorialDetails]=useState(initialTutorialDetailState)//createdOn
     const [submitted,setSubmitted]=useState(false);
+    const [selectedItem,setSelectedItem]=useState('');
 
     const handleInputChange=event=>{
         const{name,value}=event.target
         setTutorial({...tutorial,[name]:value});
+        setSelectedItem(event.target.value);
     };
+
+
+    // const handleInputChangeByDetails=event =>{//createdOn
+    //     const{name,value}=event.target
+    //     setTutorialDetails({...tutorialDetails,[name]:value});
+    //     setSelectedItem(event.target.value);
+    // }
+
+    // const saveTutorialDetails=()=>{//createdOn
+    //     var data={
+    //         created_on:new Date().toLocaleDateString()   
+    //     };
+    //     console.log(data);
+    //     TutorialDataService.create(data)
+    //     .then((response) => {
+    //         setTutorialDetails({
+    //             created_on:response.data.created_on   
+    //         });
+    //         console.log(data);
+    //         setSubmitted(true);
+    //         console.log(response.data);
+    //     }).catch((error)=>
+    //     {
+    //         console.log(error);
+    //         alert(error);
+    //     });
+       
+    // }
+
+
 
     const saveTutorial=()=>{
         var data={
@@ -23,6 +59,7 @@ const AddTutorial=()=>{
             description:tutorial.description,
             published:tutorial.published
         };
+        console.log(data);
         TutorialDataService.create(data)
         .then((response) =>{
             setTutorial({
@@ -31,6 +68,7 @@ const AddTutorial=()=>{
                 description:response.data.description,
                 published:response.data.published
             });
+            console.log(data);
             setSubmitted(true);
             console.log(response.data);
         }).catch((error)=>
@@ -40,11 +78,22 @@ const AddTutorial=()=>{
         });
     };
 
+    // const newTutorialDetails =()=> //createdOn
+    // {
+    //     setTutorialDetails(initialTutorialDetailState);
+    //     setSubmitted(false);
+    // }
+
+
     const newTutorial=()=>
     {
+        
         setTutorial(initialTutorialState);
         setSubmitted(false);
+        // newTutorialDetails();
     }
+
+
     return(
         <div className="submit-form">
             {submitted ?(
@@ -77,25 +126,32 @@ const AddTutorial=()=>{
 
                 <div className="form-group">
                     <label htmlFor="published">Published:</label>
-                    <select type="text" className="form-control" placeholder="Enter the Title"
-                    id="published" required value={tutorial.published}
+                    <select type={selectedItem} className="form-control" placeholder="Enter the Title"
+                    id="published" value={selectedItem} 
                     onChange={handleInputChange}
                     name="published"
                     >
-                        <option value={tutorial.published}>True</option>
-                        <option value={tutorial.published}>False</option>
-                    
+                        <option value=""> Published or Not</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                
                     </select>
                 </div>
+
+                {/* <button onClick={saveTutorialDetails} class="btn btn-success">Tutorial Details  </button> */}
+                
                 <br/>
-                <button onClick={saveTutorial} className="btn btn-success">
+                <div className="text-center">
+                <button onClick={saveTutorial} className="btn btn-success text-center">
                     Submit
                 </button>
+                </div>
                 </div>
                 
                 )}
                 
         </div>
+        
         
     );
 }

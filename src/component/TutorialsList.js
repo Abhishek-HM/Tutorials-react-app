@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from "react";
 import TutorialDataService from "../services/TutorialService";
 import { Link } from "react-router-dom";
+//import axios from "axios";
 
 const TutorialsList=()=>
 {
@@ -62,16 +63,16 @@ const TutorialsList=()=>
     };
 
     return(
-        <div className="list row">
-            <div className="col-md-8">
-                <div className="input-group mb-3">
+        <div>
+            <div>
+                <div className="input-group mb-3 justify-content-center">
                     <input
-                        type="text" className="from-control"
+                        type="text" className="from-control row"
                         placeholder="Search by Title"
                         value={searchTitle}
                         onChange={onChangeSearchTitle}
                     />
-                        <div className="input-group-append">
+                        <div className="input-group-append  justify-content-center bg-primary">
                             <button
                                 className="btn btn-online-secondary"
                                 type="button"
@@ -82,9 +83,9 @@ const TutorialsList=()=>
                         </div>
                 </div>
             </div>
-
-            <div className="col-md-6">
-                <h4> Tutorials List</h4>
+            <div className="list row">
+            <div className="col-md-6 text-center">
+                <h4 className="text-center"> Tutorials List</h4>
                 <ul className="list-group">
                     {tutorials && tutorials.map((tutorial,index) => (
                         <li className={
@@ -105,8 +106,8 @@ const TutorialsList=()=>
 
             <div className="col-md-6">
                 {currentTutorial ? (
-                    <div>
-                        <h4>Tutorial</h4>
+                    <div className="text-center" >
+                        <h4 className="text-center">Tutorial</h4>
                         <div>
                             <label>
                                 <strong>Title:</strong>
@@ -125,20 +126,30 @@ const TutorialsList=()=>
                             </label>{" "}
                             {currentTutorial.published ? "Published" :"Pending"}
                         </div>
-                        
-                        <Link to={"/tutorials" +currentTutorial.id}
-                        className="badge badge-warning"
-                        >Edit</Link>
-                        </div>
-                ):(
                         <div>
-                            <br />
-                            <p>Please click on a tutorial..</p>
+                            <img src={currentTutorial.imagePath} alt={currentTutorial.title+ " Image"}/>
                         </div>
+                        <Link to={"/tutorials/" +currentTutorial.id}
+                        className="btn btn-success"
+                        >Edit</Link>
+                        <Link to={"/tutorials/" +currentTutorial.id}
+                        className="btn btn-primary " onClick={()=>
+                        {
+                            
+                        }}
+                        >Add To Cart </Link>
+                        
+                        </div>
+                        
+                ):(
+                       
+                            <p className="text-center">Please click on a tutorial..</p>
+                    
                 
                 )}
             </div>
         </div>  
+        </div>
     );
 };
 export default TutorialsList;

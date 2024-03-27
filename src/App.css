@@ -4,6 +4,10 @@
     display:flex;
     align-items: center;
 }
+.text{
+    text-align:center;
+    color: aliceblue;
+}
 .list{
     text-align: left;
     max-width: 750px;
@@ -17,4 +21,18 @@
 .edit-form{
     max-width: 300px;
     margin:auto;
+}
+.button-container{
+    display:flex;
+}
+.button{
+    margin-right: 40px;
+    color: rgb(11, 20, 20);
+    border-radius: 20px;
+    border-color: black;
+    background-color: rgb(148, 109, 173);
+    
+}
+.search{
+    align-items:center;
 }

@@ -5,7 +5,7 @@ const getAll=() =>{
 };
 
 const get=id =>{
-    return http.get(`/tutorials/${id}`);
+    return http.get(`/tutorial/${id}`);
 };
 
 const create=data =>{
@@ -18,12 +18,14 @@ const remove=id =>{
     return http.delete(`/tutorials/${id}`);
 };
 const removeAll=()=>{
-    return http.delete(`/tutorials`);
+    return http.delete("/tutorials")
 };
 const findByTitle=title=>{
     return http.get(`/tutorials?title=${title}`);
 };
-
+const addTutorialDetails=id=>{
+    return http.put(`/tutorials/${id}/details`)
+}
 const TutorialService={
     getAll,
     get,
@@ -31,7 +33,8 @@ const TutorialService={
     update,
     remove,
     removeAll,
-    findByTitle
+    findByTitle,
+    addTutorialDetails
 };
 
 export default TutorialService;
